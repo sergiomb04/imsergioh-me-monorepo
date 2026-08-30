@@ -1,0 +1,65 @@
+﻿# =========================
+# Monorepo root .gitignore
+# =========================
+
+# ---- Java / Kotlin / Gradle (apps/backend) ----
+**/build/
+**/out/
+**/.gradle/
+!**/gradle-wrapper.jar
+!**/gradle-wrapper.properties
+**/gradlew
+**/gradlew.bat
+**/*.class
+**/*.jar
+!**/libs/*.jar
+**/*.war
+**/*.nar
+**/*.ear
+
+# ---- Node / Next.js (apps/web) ----
+**/node_modules/
+**/.next/
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/.vercel/
+**/.netlify/
+**/coverage/
+**/*.tsbuildinfo
+
+# ---- Secrets & Environment ----
+**/.env
+**/.env.local
+**/.env.*.local
+**/config.json
+
+# ---- Local Runtime & Persistent Data (backend) ----
+**/data/
+!**/data/links.example.json
+!**/data/.gitkeep
+**/errors/
+**/*.mmdb
+**/*.log
+
+# ---- IDE / Editor ----
+**/.idea/
+**/*.iml
+**/*.iws
+**/*.ipr
+**/.idea_modules/
+**/.vscode/
+
+# ---- OS ----
+.DS_Store
+Thumbs.db
+
+# ---- Crash / Temp files ----
+**/hs_err_pid*
+**/replay_pid*
+**/*.tmp
+**/*.swp
+**/*.bak
+
+# ---- Agent workspace artifacts ----
+**/.tasks/

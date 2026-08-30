@@ -1,0 +1,241 @@
+.page {
+  min-height: 100vh;
+  padding: 2rem clamp(1rem, 4vw, 2.4rem) 3rem;
+  background: #07090d;
+  color: #f4f4f5;
+  font-family: inherit;
+}
+
+.pageEmbedded {
+  padding: 0;
+  background: transparent;
+  color: #f4f4f5;
+  font-family: inherit;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  animation: fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.title {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  font-size: clamp(1.45rem, 2.2vw, 2.1rem);
+  color: #ffffff;
+}
+
+.subtitle {
+  margin: 0.35rem 0 0;
+  color: #a1a1aa;
+  font-size: 0.92rem;
+}
+
+.logoutButton {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(24, 24, 27, 0.8);
+  color: #e4e4e7;
+  border-radius: 12px;
+  height: 38px;
+  padding: 0 1rem;
+  font-weight: 600;
+  font-size: 0.82rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.logoutButton:hover {
+  background: rgba(244, 63, 94, 0.15);
+  border-color: rgba(244, 63, 94, 0.4);
+  color: #fecdd3;
+}
+
+.card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(24, 24, 27, 0.7) 0%, rgba(9, 9, 11, 0.85) 100%);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  padding: 1.15rem 1.25rem;
+  animation: fadeUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(6, 182, 212, 0.3);
+}
+
+.kpiTitle {
+  margin: 0;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #a1a1aa;
+  font-weight: 600;
+}
+
+.kpiValue {
+  margin: 0.5rem 0 0;
+  font-size: clamp(1.3rem, 1.7vw, 1.85rem);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.kpiMeta {
+  margin: 0.35rem 0 0;
+  color: #71717a;
+  font-size: 0.78rem;
+}
+
+.panel {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 1.25rem 1.4rem;
+  background: rgba(18, 18, 23, 0.7);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  animation: scaleIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.panelTitle {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.panelSubtle {
+  margin: 0.25rem 0 1rem;
+  color: #a1a1aa;
+  font-size: 0.8rem;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  border-radius: 14px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 760px;
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 0.75rem 0.6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.85rem;
+}
+
+.table th {
+  color: #a1a1aa;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.table tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  height: 1.4rem;
+  padding: 0 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.badgeActive {
+  background: rgba(52, 211, 153, 0.15);
+  color: #6ee7b7;
+  border: 1px solid rgba(52, 211, 153, 0.35);
+}
+
+.badgeEnded {
+  background: rgba(161, 161, 170, 0.15);
+  color: #d4d4d8;
+  border: 1px solid rgba(161, 161, 170, 0.3);
+}
+
+.emptyState {
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  padding: 1.5rem;
+  text-align: center;
+  color: #71717a;
+  font-size: 0.86rem;
+}
+
+.skeleton {
+  border-radius: 14px;
+  height: 100%;
+  min-height: 160px;
+  background: linear-gradient(90deg, rgba(24, 24, 27, 0.6), rgba(39, 39, 42, 0.8), rgba(24, 24, 27, 0.6));
+  background-size: 200% 100%;
+  animation: shimmer 1.5s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 720px) {
+  .page {
+    padding: 1.1rem 0.7rem 2rem;
+  }
+
+  .header {
+    flex-direction: column;
+  }
+}

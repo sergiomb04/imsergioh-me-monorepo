@@ -1,0 +1,79 @@
+# =========================
+# Java / Kotlin / Gradle
+# =========================
+
+# Build output
+/build/
+/out/
+bin/
+
+# Gradle
+.gradle/
+!gradle-wrapper.jar
+!gradle-wrapper.properties
+gradle-app.setting
+
+# Gradle wrapper
+gradlew
+gradlew.bat
+
+# Compiled class files
+*.class
+
+# Jar/WAR/EAR
+*.jar
+!libs/*.jar
+*.war
+*.nar
+*.ear
+
+# Logs
+*.log
+
+# =========================
+# IntelliJ IDEA / VSCode
+# =========================
+.idea/
+*.iml
+*.iws
+*.ipr
+*.log
+.idea_modules/
+.vscode/
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Crash logs & Temp files
+# =========================
+hs_err_pid*
+replay_pid*
+*.tmp
+*.swp
+*.bak
+
+# =========================
+# Secrets & Environment
+# =========================
+.env
+.env.local
+.env.*.local
+config.json
+
+# =========================
+# Local Runtime & Persistent Data
+# =========================
+data/
+!data/links.example.json
+!data/.gitkeep
+errors/
+
+# GeoIP databases
+*.mmdb
+
+# Task artifacts
+/.tasks

@@ -1,0 +1,40 @@
+# Node modules
+node_modules/
+
+# Build output
+.next/
+out/
+
+# Logs
+npm-debug
+.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env*
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Vercel/Netlify
+.vercel/
+.netlify/
+
+# Testing
+coverage/
+
+# IDEs
+.vscode/
+.idea/
+
+# Optional: Mac/Linux system files
+*.swp
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Personal workspace for prompting to Agentic Model and generate code / make changes
+.tasks/

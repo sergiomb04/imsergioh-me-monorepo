@@ -1,0 +1,11 @@
+{
+  "name": "livestate-nextjs",
+  "version": "1.0.0",
+  "description": "LiveState Realtime Hook",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": "./src/index.js",
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0"
+  }
+}
