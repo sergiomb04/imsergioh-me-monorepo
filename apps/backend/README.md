@@ -95,7 +95,7 @@ Compila y arranca la aplicación directamente:
   ```
 
 ### 2. Compilar y Generar el JAR de Producción
-Genera el paquete ejecutable autónomo en `build/libs/`:
+Genera el paquete ejecutable autónomo en `build/libs/` usando el plugin de Spring Boot (`bootJar`):
 
 - **Windows:**
   ```powershell
@@ -105,6 +105,9 @@ Genera el paquete ejecutable autónomo en `build/libs/`:
   ```bash
   ./gradlew bootJar
   ```
+
+> [!NOTE]
+> En `backend` se utiliza **`bootJar`** (Spring Boot), no `shadowJar`. La tarea `jar` convencional está deshabilitada en `build.gradle.kts` para garantizar que solo se genere el ejecutable completo con el manifest y loaders de Spring Boot.
 
 ### 3. Ejecutar el Archivo JAR Generado
 ```bash

@@ -22,7 +22,8 @@ API REST + WebSocket en tiempo real (LiveState). Analíticas, acortador de enlac
 
 ### 💬 [Chat](./apps/chat)
 Servidor WebSocket ligero para el chat interactivo en tiempo real.
-- **Stack**: Java, Java-WebSocket, Gson, Gradle
+- **Stack**: Java, Java-WebSocket, Gson, Gradle (Shadow JAR)
+- **Docs**: [apps/chat/README.md](./apps/chat/README.md)
 
 ### 🟢 [Web](./apps/web)
 Sitio web personal, portafolio y panel de administración.
@@ -32,14 +33,19 @@ Sitio web personal, portafolio y panel de administración.
 ## ⚡ Quick Start
 
 ```bash
-# Backend (LiveState API)
+# Backend (LiveState API — Spring Boot)
 cd apps/backend
 cp .env.example .env
 ./gradlew bootRun
+# o compilar JAR
+./gradlew bootJar
 
-# Chat (WebSocket Server)
+# Chat (WebSocket Server — Shadow JAR)
 cd apps/chat
+cp .env.example .env
 ./gradlew run
+# o compilar JAR
+./gradlew shadowJar
 
 # Web (Frontend Next.js)
 cd apps/web
