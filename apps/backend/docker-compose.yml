@@ -2,7 +2,7 @@ services:
   mariadb:
     image: mariadb:11.4
     container_name: imsergioh-mariadb
-    restart: unless-stopped
+    restart: "no"
     environment:
       MARIADB_ROOT_PASSWORD: ${DB_PASSWORD:-root}
       MARIADB_DATABASE: ${DB_NAME:-analytics}
