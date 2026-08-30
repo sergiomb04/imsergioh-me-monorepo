@@ -164,19 +164,15 @@ spring.servlet.multipart.max-file-size=500MB
 spring.servlet.multipart.max-request-size=500MB
 ```
 
-### `config.json`
+### `config.json` (o `.env`)
 ```json
 {
-  "AUTH_HEADER": "Authorization",
-  "redisPassword": "<REDIS_PASSWORD>",
   "ADMIN_SESSION_SECRET": "<SECRET_KEY>",
-  "JWT_SECRET": "<JWT_SECRET>",
-  "JWT_ISSUER": "mi-example-backend-api",
-  "AUTH_REQUIRED": false,
-  "REFRESH_TOKEN_SECRET": "<REFRESH_SECRET>",
-  "JWT_EXPIRATION_SECS": 86400.0,
-  "REFRESH_TOKEN_EXPIRATION_SECS": 604800.0,
-  "TOKEN_PREFIX": "Bearer"
+  "dbHost": "127.0.0.1",
+  "dbPort": "3306",
+  "dbName": "analytics",
+  "dbUser": "root",
+  "dbPassword": "root_password"
 }
 ```
 

@@ -15,6 +15,9 @@ public class CdnService {
 
     public Path getCdnRoot() {
         String cdnRootEnv = System.getenv("CDN_ROOT");
+        if (cdnRootEnv == null || cdnRootEnv.isBlank()) {
+            cdnRootEnv = System.getProperty("CDN_ROOT");
+        }
         if (cdnRootEnv != null && !cdnRootEnv.isBlank()) {
             return Paths.get(cdnRootEnv).toAbsolutePath().normalize();
         }

@@ -50,10 +50,6 @@ export function connect(url = `${realtimeUrl}/realtime`, token) {
       socketManager.setConnectionState("open");
       reconnectAttempts = 0;
 
-      if (socketManager.token) {
-        sendAction("auth", { token: socketManager.token });
-      }
-
       Object.keys(socketManager.subscriptions).forEach((subKey) => {
         sendAction("subscribe", { sub: subKey });
       });
