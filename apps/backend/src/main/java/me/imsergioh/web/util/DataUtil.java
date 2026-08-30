@@ -14,6 +14,9 @@ public class DataUtil {
     static {
         try {
             String geoDbPath = System.getenv("GEOIP_DB_PATH");
+            if (geoDbPath == null || geoDbPath.isBlank()) {
+                geoDbPath = System.getProperty("GEOIP_DB_PATH");
+            }
             File dbFile = (geoDbPath != null && !geoDbPath.isBlank())
                     ? new File(geoDbPath)
                     : new File("data/GeoLite2-Country.mmdb");

@@ -1,7 +1,5 @@
 package me.imsergioh.web.util;
 
-import me.imsergioh.livecore.config.MainConfig;
-
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
@@ -62,9 +60,6 @@ public class AuthUtils {
         String secret = System.getenv("ADMIN_SESSION_SECRET");
         if (secret == null || secret.isBlank()) {
             secret = System.getProperty("ADMIN_SESSION_SECRET");
-        }
-        if (secret == null || secret.isBlank()) {
-            secret = MainConfig.getConfig().getString("ADMIN_SESSION_SECRET", null);
         }
 
         // Fail-closed: require explicit secret in environment or configuration.

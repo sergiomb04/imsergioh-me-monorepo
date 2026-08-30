@@ -2,9 +2,7 @@ package me.imsergioh.web;
 
 import me.imsergioh.livecore.action.SubscribeAction;
 import me.imsergioh.livecore.action.UnSubscribeAction;
-import me.imsergioh.livecore.config.MainConfig;
 import me.imsergioh.livecore.manager.ClientsManager;
-import me.imsergioh.livecore.util.JwtUtil;
 import me.imsergioh.livecore.manager.ClientActionsManager;
 import me.imsergioh.web.action.admin.SetSessionsPageAction;
 import me.imsergioh.web.action.admin.SubAdminAction;
@@ -30,36 +28,20 @@ public class BackendApplication {
         });
 
         loadDotEnv();
+        loadConfigJson();
 
         try {
-            String envJwtSecret = getEnvOrProp("JWT_SECRET", null);
-            if (envJwtSecret != null && !envJwtSecret.isBlank()) {
-                MainConfig.getConfig().register("JWT_SECRET", envJwtSecret);
+            String adminSecret = getEnvOrProp("ADMIN_SESSION_SECRET", null);
+            if (adminSecret == null || adminSecret.isBlank() || "9EyS21sTCg16sl1NDD2RZ9b4FQt".equals(adminSecret) || "TOKEEEEEEEEEN".equals(adminSecret)) {
+                String generated = java.util.UUID.randomUUID().toString().replace("-", "") + java.util.UUID.randomUUID().toString().replace("-", "");
+                System.setProperty("ADMIN_SESSION_SECRET", generated);
             }
-            JwtUtil.init(MainConfig.getSecret(), MainConfig.getExpirationSecs(), MainConfig.getIssuer());
-            String envAdminSecret = getEnvOrProp("ADMIN_SESSION_SECRET", null);
-            if (envAdminSecret != null && !envAdminSecret.isBlank()) {
-                MainConfig.getConfig().register("ADMIN_SESSION_SECRET", envAdminSecret);
-            } else {
-                String existing = MainConfig.getConfig().getString("ADMIN_SESSION_SECRET", null);
-                if (existing == null || existing.isBlank() || "9EyS21sTCg16sl1NDD2RZ9b4FQt".equals(existing) || "TOKEEEEEEEEEN".equals(existing)) {
-                    String generated = java.util.UUID.randomUUID().toString().replace("-", "") + java.util.UUID.randomUUID().toString().replace("-", "");
-                    MainConfig.getConfig().register("ADMIN_SESSION_SECRET", generated);
-                }
-            }
-            MainConfig.getConfig().register("dbHost", "localhost");
-            MainConfig.getConfig().register("dbPort", "3306");
-            MainConfig.getConfig().register("dbUser", "root");
-            MainConfig.getConfig().register("dbPassword", "root");
-            MainConfig.getConfig().register("dbName", "analytics");
-            MainConfig.getConfig().register("AUTH_REQUIRED", false);
-            MainConfig.getConfig().save();
 
-            String cfgHost = getEnvOrProp("DB_HOST", MainConfig.getConfig().getString("dbHost", "localhost"));
-            String cfgPort = getEnvOrProp("DB_PORT", MainConfig.getConfig().getString("dbPort", "3306"));
-            String cfgUser = getEnvOrProp("DB_USER", MainConfig.getConfig().getString("dbUser", "root"));
-            String cfgPassword = getEnvOrProp("DB_PASSWORD", MainConfig.getConfig().getString("dbPassword", "root"));
-            String cfgName = getEnvOrProp("DB_NAME", MainConfig.getConfig().getString("dbName", "analytics"));
+            String cfgHost = getEnvOrProp("DB_HOST", "localhost");
+            String cfgPort = getEnvOrProp("DB_PORT", "3306");
+            String cfgUser = getEnvOrProp("DB_USER", "root");
+            String cfgPassword = getEnvOrProp("DB_PASSWORD", "root");
+            String cfgName = getEnvOrProp("DB_NAME", "analytics");
 
             System.setProperty("DB_HOST", cfgHost);
             System.setProperty("DB_PORT", cfgPort);
@@ -122,6 +104,49 @@ public class BackendApplication {
                     System.err.println("⚠️ Error leyendo " + envFile.getAbsolutePath() + ": " + e.getMessage());
                 }
             }
+        }
+    }
+
+    private static void loadConfigJson() {
+        java.io.File[] searchPaths = new java.io.File[]{
+                new java.io.File("config.json"),
+                new java.io.File("../config.json"),
+                new java.io.File("../../config.json")
+        };
+        for (java.io.File configFile : searchPaths) {
+            if (configFile.exists() && configFile.isFile()) {
+                try (java.io.FileReader reader = new java.io.FileReader(configFile)) {
+                    com.google.gson.JsonObject obj = com.google.gson.JsonParser.parseReader(reader).getAsJsonObject();
+                    if (obj.has("ADMIN_SESSION_SECRET") && !obj.get("ADMIN_SESSION_SECRET").isJsonNull()) {
+                        setPropIfAbsent("ADMIN_SESSION_SECRET", obj.get("ADMIN_SESSION_SECRET").getAsString());
+                    }
+                    if (obj.has("dbHost") && !obj.get("dbHost").isJsonNull()) {
+                        setPropIfAbsent("DB_HOST", obj.get("dbHost").getAsString());
+                    }
+                    if (obj.has("dbPort") && !obj.get("dbPort").isJsonNull()) {
+                        setPropIfAbsent("DB_PORT", obj.get("dbPort").getAsString());
+                    }
+                    if (obj.has("dbUser") && !obj.get("dbUser").isJsonNull()) {
+                        setPropIfAbsent("DB_USER", obj.get("dbUser").getAsString());
+                    }
+                    if (obj.has("dbPassword") && !obj.get("dbPassword").isJsonNull()) {
+                        setPropIfAbsent("DB_PASSWORD", obj.get("dbPassword").getAsString());
+                    }
+                    if (obj.has("dbName") && !obj.get("dbName").isJsonNull()) {
+                        setPropIfAbsent("DB_NAME", obj.get("dbName").getAsString());
+                    }
+                    System.out.println("✅ [BackendApplication] Fallback config.json cargado desde: " + configFile.getAbsolutePath());
+                    break;
+                } catch (Exception e) {
+                    System.err.println("⚠️ Error leyendo config.json: " + e.getMessage());
+                }
+            }
+        }
+    }
+
+    private static void setPropIfAbsent(String key, String value) {
+        if (value != null && !value.isBlank() && System.getProperty(key) == null && System.getenv(key) == null) {
+            System.setProperty(key, value);
         }
     }
 
