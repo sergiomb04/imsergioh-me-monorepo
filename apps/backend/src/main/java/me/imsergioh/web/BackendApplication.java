@@ -9,6 +9,7 @@ import me.imsergioh.web.action.admin.SubAdminAction;
 import me.imsergioh.web.action.analytics.LinkClickAction;
 import me.imsergioh.web.action.analytics.PageViewAction;
 import me.imsergioh.web.action.admin.DeleteSessionAction;
+import me.imsergioh.web.action.auth.AuthAction;
 import me.imsergioh.web.session.AdminSession;
 import me.imsergioh.web.session.AnalyticsSession;
 import me.imsergioh.web.session.UserSession;
@@ -59,6 +60,7 @@ public class BackendApplication {
             ClientActionsManager.register(new SubscribeAction(), new UnSubscribeAction());
 
             ClientActionsManager.register(
+                    new AuthAction(),
                     new PageViewAction(),
                     new LinkClickAction(),
                     new SubAdminAction(),
