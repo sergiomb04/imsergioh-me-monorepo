@@ -7,8 +7,18 @@ import java.util.List;
 
 public class Message {
 
-    private static final List<String> adminsIP = List.of("185.74.158.89");
+    private static final List<String> DEFAULT_ADMIN_IPS = List.of("127.0.0.1");
 
+    private static List<String> getAdminIps() {
+        String env = System.getenv("ADMIN_IPS");
+        if (env != null && !env.isBlank()) {
+            return java.util.Arrays.stream(env.split(","))
+                    .map(String::trim)
+                    .filter(s -> !s.isEmpty())
+                    .toList();
+        }
+        return DEFAULT_ADMIN_IPS;
+    }
 
     private final String owner, message;
     private long date;
@@ -29,7 +39,7 @@ public class Message {
         admin = false;
         try {
             String ip = ConnectionsManager.getConnection(conn).getIp();
-            if (adminsIP.contains(ip)) admin = true;
+            if (ip != null && getAdminIps().contains(ip)) admin = true;
         } catch (Exception e) {
             e.printStackTrace();
         }

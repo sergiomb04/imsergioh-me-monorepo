@@ -61,6 +61,9 @@ public class AuthUtils {
     private static String signPayload(String payload) {
         String secret = System.getenv("ADMIN_SESSION_SECRET");
         if (secret == null || secret.isBlank()) {
+            secret = System.getProperty("ADMIN_SESSION_SECRET");
+        }
+        if (secret == null || secret.isBlank()) {
             secret = MainConfig.getConfig().getString("ADMIN_SESSION_SECRET", null);
         }
 

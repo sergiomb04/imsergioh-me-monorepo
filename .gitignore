@@ -2,14 +2,12 @@
 # Monorepo root .gitignore
 # =========================
 
-# ---- Java / Kotlin / Gradle (apps/backend) ----
+# ---- Java / Kotlin / Gradle ----
 **/build/
 **/out/
 **/.gradle/
 !**/gradle-wrapper.jar
 !**/gradle-wrapper.properties
-**/gradlew
-**/gradlew.bat
 **/*.class
 **/*.jar
 !**/libs/*.jar
@@ -30,11 +28,12 @@
 
 # ---- Secrets & Environment ----
 **/.env
-**/.env.local
-**/.env.*.local
+**/.env*
+!**/.env.example
+!**/.env.*.example
 **/config.json
 
-# ---- Local Runtime & Persistent Data (backend) ----
+# ---- Local Runtime & Persistent Data ----
 **/data/
 !**/data/links.example.json
 !**/data/.gitkeep

@@ -24,6 +24,9 @@ public class WebConfig implements WebMvcConfigurer {
         config.setAllowCredentials(true);
 
         String allowedOriginsEnv = System.getenv("CORS_ALLOWED_ORIGINS");
+        if (allowedOriginsEnv == null || allowedOriginsEnv.isBlank()) {
+            allowedOriginsEnv = System.getProperty("CORS_ALLOWED_ORIGINS");
+        }
         if (allowedOriginsEnv != null && !allowedOriginsEnv.isBlank()) {
             List<String> origins = Arrays.stream(allowedOriginsEnv.split(","))
                     .map(String::trim)
@@ -31,7 +34,7 @@ public class WebConfig implements WebMvcConfigurer {
                     .toList();
             config.setAllowedOriginPatterns(origins);
         } else {
-            config.setAllowedOriginPatterns(List.of("*"));
+            config.setAllowedOriginPatterns(List.of("http://localhost:3000", "http://127.0.0.1:3000", "https://imsergioh.me", "*"));
         }
 
         config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Accept", "Origin", "X-Requested-With", "*"));
