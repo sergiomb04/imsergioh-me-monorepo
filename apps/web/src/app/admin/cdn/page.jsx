@@ -9,7 +9,7 @@ export default async function AdminCdnPage() {
   return (
     <AdminShell
       title="Gestión de CDN & Assets"
-      subtitle="Sube, explora y administra archivos estáticos y recursos multimedia para el sitio web"
+      subtitle="Subida y administración de archivos multimedia"
       badge="Storage"
       actions={<AvailabilityToggle adminToken={token} />}
     >
