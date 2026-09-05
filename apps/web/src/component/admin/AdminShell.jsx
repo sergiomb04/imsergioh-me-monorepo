@@ -309,29 +309,31 @@ export default function AdminShell({
         {/* Content Area */}
         <div className="flex min-w-0 flex-1 flex-col">
           {/* Main Top Header Banner */}
-          <div className="border-b border-zinc-800/60 bg-zinc-950/40 backdrop-blur-md px-4 py-5 sm:px-8">
-            <div className="mx-auto flex max-w-7xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                {/* Breadcrumbs & Badge */}
-                <div className="flex items-center gap-2 text-xs text-zinc-500">
-                  <span className="font-semibold text-zinc-400">Admin</span>
-                  <span>/</span>
-                  <span className="text-zinc-400">{currentNav.label}</span>
+          <div className="border-b border-zinc-800/60 bg-zinc-950/40 backdrop-blur-md px-4 py-3.5 sm:px-8">
+            <div className="mx-auto flex max-w-7xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
+                {/* Route & Category */}
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-medium text-zinc-500">Admin</span>
+                  <span className="text-xs text-zinc-600">/</span>
+                  <h1 className="font-montserrat text-xs sm:text-sm font-semibold tracking-tight text-zinc-200">
+                    {currentNav?.label || title}
+                  </h1>
                   {badge && (
-                    <span className="ml-2 inline-flex items-center rounded-md border border-zinc-700/60 bg-zinc-800/60 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-400">
+                    <span className="inline-flex items-center rounded-md border border-zinc-800 bg-zinc-800/60 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-400">
                       {badge}
                     </span>
                   )}
                 </div>
 
-                {/* Page Title */}
-                <h1 className="mt-2 font-montserrat text-2xl font-bold tracking-tight text-white sm:text-3xl">
-                  {title}
-                </h1>
+                {/* Description at the same height beside it */}
                 {subtitle && (
-                  <p className="mt-1 text-sm text-zinc-500 max-w-3xl font-sans">
-                    {subtitle}
-                  </p>
+                  <div className="flex items-center gap-2">
+                    <span className="hidden sm:inline text-xs text-zinc-600">•</span>
+                    <p className="text-xs text-zinc-400">
+                      {subtitle}
+                    </p>
+                  </div>
                 )}
               </div>
 
