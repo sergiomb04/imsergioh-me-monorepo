@@ -9,7 +9,7 @@ export default async function AdminLinksPage() {
   return (
     <AdminShell
       title="Acortador de Links"
-      subtitle="Crea enlaces cortos personalizados, edita destinos y audita el historial de tráfico"
+      subtitle="Gestión de enlaces cortos y estadísticas de clics"
       badge="URL Manager"
       actions={<AvailabilityToggle adminToken={token} />}
     >

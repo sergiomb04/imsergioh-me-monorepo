@@ -9,7 +9,7 @@ export default async function AdminAnalyticsPage() {
   return (
     <AdminShell
       title="Analíticas en tiempo real"
-      subtitle="Seguimiento de sesiones activas, eventos de navegación y orígenes de tráfico en vivo"
+      subtitle="Seguimiento de sesiones activas y tráfico en tiempo real"
       badge="LiveState"
       actions={<AvailabilityToggle adminToken={token} />}
     >

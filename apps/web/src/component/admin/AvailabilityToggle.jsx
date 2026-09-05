@@ -22,34 +22,21 @@ export default function AvailabilityToggle({
     if (isLoading) {
       return (
         <div
-          className={`relative overflow-hidden rounded-3xl border border-zinc-800/80 bg-linear-to-b from-zinc-900/30 via-zinc-950/40 to-zinc-950/80 p-6 backdrop-blur-xl transition-all duration-300 shadow-xl ${className}`}
+          className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-4 sm:p-5 backdrop-blur-sm shadow-sm ${className}`}
         >
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div className="space-y-1.5">
-              <div className="flex items-center gap-2">
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-zinc-800 bg-zinc-900/60 px-2.5 py-0.5 text-[11px] font-semibold text-zinc-400 animate-pulse">
-                  <span className="h-2 w-2 rounded-full bg-zinc-700" />
-                  Cargando...
-                </span>
-                <span className="text-[11px] text-zinc-500 font-mono">
-                  LiveState WebSocket
-                </span>
-              </div>
+          <div className="flex items-center gap-3">
+            <span className="font-montserrat text-sm font-semibold text-white">
+              Disponibilidad pública
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-zinc-800 bg-zinc-800/60 px-2.5 py-0.5 text-xs text-zinc-400 animate-pulse">
+              <span className="h-2 w-2 rounded-full bg-zinc-700" />
+              Cargando...
+            </span>
+          </div>
 
-              <h4 className="font-montserrat text-lg font-bold text-white tracking-tight">
-                Estado de Disponibilidad Pública
-              </h4>
-              <p className="text-xs text-zinc-400 max-w-lg leading-relaxed">
-                Controla el badge en tiempo real que ven los usuarios en el pie de página de la web.
-              </p>
-            </div>
-
-            <div className="flex flex-col items-start sm:items-end gap-2 shrink-0">
-              <div className="relative inline-flex h-11 items-center gap-3 rounded-2xl border border-zinc-800 bg-zinc-900/60 px-4 text-xs font-semibold text-zinc-500 animate-pulse">
-                <Loader2 className="h-4 w-4 animate-spin text-zinc-500" />
-                <span>Cargando estado...</span>
-              </div>
-            </div>
+          <div className="inline-flex h-9 items-center gap-2 rounded-xl border border-zinc-800 bg-zinc-800/50 px-3 text-xs text-zinc-500 animate-pulse">
+            <Loader2 className="h-3.5 w-3.5 animate-spin text-zinc-500" />
+            <span>Cargando...</span>
           </div>
         </div>
       );
@@ -57,98 +44,68 @@ export default function AvailabilityToggle({
 
     return (
       <div
-        className={`relative overflow-hidden rounded-3xl border p-6 backdrop-blur-xl transition-all duration-300 shadow-xl ${
-          isAvailable
-            ? "border-emerald-500/30 bg-linear-to-b from-emerald-950/20 via-zinc-950/40 to-zinc-950/80 shadow-emerald-500/5"
-            : "border-amber-500/30 bg-linear-to-b from-amber-950/20 via-zinc-950/40 to-zinc-950/80 shadow-amber-500/5"
-        } ${className}`}
+        className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-4 sm:p-5 backdrop-blur-sm shadow-sm transition-all duration-200 ${className}`}
       >
-        {/* Glow ambient */}
-        <div
-          className={`absolute -top-12 -right-12 h-36 w-36 rounded-full blur-[70px] pointer-events-none transition-colors duration-500 ${
-            isAvailable ? "bg-emerald-500/20" : "bg-amber-500/20"
-          }`}
-        />
-
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div className="space-y-1.5">
-            <div className="flex items-center gap-2">
-              <span
-                className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[11px] font-semibold tracking-wide transition-all ${
-                  isAvailable
-                    ? "border-emerald-500/30 bg-emerald-500/15 text-emerald-300"
-                    : "border-amber-500/30 bg-amber-500/15 text-amber-300"
-                }`}
-              >
-                <span className="relative flex h-2 w-2">
-                  <span
-                    className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
-                      isAvailable ? "bg-emerald-400" : "bg-amber-400"
-                    }`}
-                  />
-                  <span
-                    className={`relative inline-flex rounded-full h-2 w-2 ${
-                      isAvailable ? "bg-emerald-500" : "bg-amber-500"
-                    }`}
-                  />
-                </span>
-                {isAvailable ? "Disponible" : "Ausente"}
-              </span>
-
-              <span className="text-[11px] text-zinc-500 font-mono">
-                LiveState WebSocket
-              </span>
-            </div>
-
-            <h4 className="font-montserrat text-lg font-bold text-white tracking-tight">
-              Estado de Disponibilidad Pública
-            </h4>
-            <p className="text-xs text-zinc-400 max-w-lg leading-relaxed">
-              Controla el badge en tiempo real que ven los usuarios en el pie de página de la web. Cambia entre <strong className="text-emerald-300 font-medium">Disponible</strong> y <strong className="text-amber-300 font-medium">Ausente</strong> de forma inmediata y sincronizada.
-            </p>
-          </div>
-
-          <div className="flex flex-col items-start sm:items-end gap-2 shrink-0">
-            <button
-              type="button"
-              onClick={handleToggle}
-              disabled={updating || !adminToken}
-              className={`relative inline-flex h-11 items-center gap-3 rounded-2xl border px-4 text-xs font-semibold shadow-lg transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer ${
-                isAvailable
-                  ? "border-emerald-500/40 bg-emerald-500/20 text-emerald-200 hover:bg-emerald-500/30 hover:border-emerald-400/60 shadow-emerald-500/10"
-                  : "border-amber-500/40 bg-amber-500/20 text-amber-200 hover:bg-amber-500/30 hover:border-amber-400/60 shadow-amber-500/10"
-              }`}
-            >
-              {updating ? (
-                <>
-                  <Loader2 className="h-4 w-4 animate-spin text-zinc-300" />
-                  <span>Sincronizando...</span>
-                </>
-              ) : (
-                <>
-                  {/* Custom Toggle Switch Track */}
-                  <div
-                    className={`relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors duration-200 ${
-                      isAvailable ? "bg-emerald-500" : "bg-zinc-700"
-                    }`}
-                  >
-                    <span
-                      className={`inline-block h-3.5 w-3.5 transform rounded-full bg-white transition-transform duration-200 ${
-                        isAvailable ? "translate-x-4.5" : "translate-x-1"
-                      }`}
-                    />
-                  </div>
-                  <span>{isAvailable ? "Marcar Ausente" : "Marcar Disponible"}</span>
-                </>
+        <div className="flex items-center gap-3">
+          <span className="font-montserrat text-sm font-semibold text-white">
+            Disponibilidad pública
+          </span>
+          <span
+            className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-medium ${
+              isAvailable
+                ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-300"
+                : "border-zinc-700 bg-zinc-800/80 text-zinc-300"
+            }`}
+          >
+            <span className="relative flex h-2 w-2">
+              {isAvailable && (
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
               )}
-            </button>
+              <span
+                className={`relative inline-flex rounded-full h-2 w-2 ${
+                  isAvailable ? "bg-emerald-500" : "bg-zinc-500"
+                }`}
+              />
+            </span>
+            {isAvailable ? "Disponible" : "Ausente"}
+          </span>
+        </div>
 
-            {errorMsg && (
-              <span className="text-[11px] font-medium text-rose-400">
-                {errorMsg}
-              </span>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={handleToggle}
+            disabled={updating || !adminToken}
+            className="inline-flex items-center gap-2.5 rounded-xl border border-zinc-700/80 bg-zinc-800/80 px-3.5 py-2 text-xs font-medium text-zinc-200 transition-all duration-200 hover:border-zinc-600 hover:bg-zinc-800 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+          >
+            {updating ? (
+              <>
+                <Loader2 className="h-3.5 w-3.5 animate-spin text-zinc-400" />
+                <span>Sincronizando...</span>
+              </>
+            ) : (
+              <>
+                <div
+                  className={`relative inline-flex h-4 w-7 shrink-0 items-center rounded-full transition-colors duration-200 ${
+                    isAvailable ? "bg-emerald-600" : "bg-zinc-700"
+                  }`}
+                >
+                  <span
+                    className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform duration-200 ${
+                      isAvailable ? "translate-x-3.5" : "translate-x-0.5"
+                    }`}
+                  />
+                </div>
+                <span>{isAvailable ? "Marcar Ausente" : "Marcar Disponible"}</span>
+              </>
             )}
-          </div>
+          </button>
+
+          {errorMsg && (
+            <span className="text-xs font-medium text-rose-400">
+              {errorMsg}
+            </span>
+          )}
         </div>
       </div>
     );
