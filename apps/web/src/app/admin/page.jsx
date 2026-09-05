@@ -10,13 +10,8 @@ import {
   FolderArchive,
   ArrowUpRight,
   ShieldCheck,
-  Zap,
-  Globe,
-  Sparkles,
-  Server,
   Lock,
   ArrowLeft,
-  CheckCircle2,
 } from "lucide-react";
 
 export default async function AdminPage() {
@@ -28,88 +23,40 @@ export default async function AdminPage() {
       {
         href: "/admin/analytics",
         title: "Analíticas",
-        badge: "En vivo",
+        description: "Métricas y tráfico en tiempo real.",
         icon: Activity,
-        description:
-          "Seguimiento de sesiones activas, eventos de navegación, mapa de países y tasas de retención.",
-        highlights: [
-          "Transmisión bidireccional vía WebSockets (LiveState)",
-          "Gráfico de volumen temporal y desglose de eventos",
-          "Auditoría detallada por sesión de usuario",
-        ],
       },
       {
         href: "/admin/links",
-        title: "Acortador de Links",
-        badge: "Gestor URLs",
+        title: "Acortador de links",
+        description: "Gestión de enlaces cortos y clics.",
         icon: Link2,
-        description:
-          "Crea y administra enlaces cortos personalizados con trazabilidad de clics y hashes de IP.",
-        highlights: [
-          "Redirección inmediata con /link/[id]",
-          "Contador acumulado y registro de visitas",
-          "Edición y eliminación dinámica de rutas",
-        ],
       },
       {
         href: "/admin/cdn",
-        title: "Gestión de CDN & Assets",
-        badge: "Almacenamiento",
+        title: "Gestión de CDN",
+        description: "Subida y organización de archivos multimedia.",
         icon: FolderArchive,
-        description:
-          "Sube recursos multimedia, organiza por carpetas y obtén URLs estáticas directas para el sitio.",
-        highlights: [
-          "Subida rápida y estructura de carpetas",
-          "Copia de enlaces directos al portapapeles",
-          "Explorador integrado con visualización previa",
-        ],
-      },
-    ];
-
-    const stats = [
-      {
-        label: "Estado del Servidor",
-        value: "Operativo",
-        sub: "Next.js 16 + LiveState",
-        icon: Server,
-        color: "text-emerald-400",
-      },
-      {
-        label: "Seguridad de Sesión",
-        value: "OAuth 2.0",
-        sub: "Google Cloud Console",
-        icon: ShieldCheck,
-        color: "text-cyan-400",
-      },
-      {
-        label: "Almacenamiento",
-        value: "Backend API",
-        sub: "Persistencia JSON & RAM",
-        icon: Zap,
-        color: "text-amber-400",
       },
     ];
 
     return (
       <AdminShell
         title="Dashboard de Administración"
-        subtitle="Panel centralizado de control, monitorización y gestión de SergioHub"
+        subtitle="Panel centralizado de control y monitorización"
         badge="Vista Principal"
         actions={<AvailabilityToggle adminToken={token} />}
       >
-        <div className="space-y-8">
+        <div className="space-y-6">
           {/* Availability Status Card */}
           <AvailabilityToggle adminToken={token} variant="card" />
 
           {/* Core Modules Grid */}
-          <section className="space-y-4">
+          <section className="space-y-3">
             <div>
-              <h3 className="font-montserrat text-lg font-bold text-white tracking-tight">
+              <h3 className="font-montserrat text-sm font-semibold text-white tracking-tight">
                 Módulos de Gestión
               </h3>
-              <p className="text-xs text-zinc-500">
-                Accede rápidamente a las herramientas internas
-              </p>
             </div>
 
             <div className="grid gap-4 md:grid-cols-3">
@@ -119,47 +66,24 @@ export default async function AdminPage() {
                   <Link
                     key={mod.href}
                     href={mod.href}
-                    className="group relative flex flex-col justify-between rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-5 backdrop-blur-xl shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-700/80 hover:bg-zinc-900/60 hover:shadow-lg"
+                    className="group relative flex flex-col justify-between rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-5 backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-700/80 hover:bg-zinc-900/70 shadow-sm hover:shadow-md"
                   >
-                    <div className="space-y-4">
+                    <div className="space-y-3">
                       <div className="flex items-center justify-between">
-                        <div className="rounded-xl border border-zinc-700/60 bg-zinc-800/60 p-2.5 shadow-sm transition-transform duration-200 group-hover:scale-105">
-                          <Icon className="h-5 w-5 text-zinc-300" />
+                        <div className="rounded-xl border border-zinc-800 bg-zinc-800/60 p-2.5 text-zinc-400 group-hover:text-zinc-200 transition-colors">
+                          <Icon className="h-5 w-5" />
                         </div>
-                        <span className="rounded-full border border-zinc-700/60 bg-zinc-800/60 px-2.5 py-1 text-[11px] font-semibold tracking-wide text-zinc-400">
-                          {mod.badge}
-                        </span>
+                        <ArrowUpRight className="h-4 w-4 text-zinc-500 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-zinc-300" />
                       </div>
 
                       <div>
-                        <h4 className="font-montserrat text-base font-bold text-white transition-colors duration-200">
+                        <h4 className="font-montserrat text-base font-semibold text-white group-hover:text-zinc-100 transition-colors">
                           {mod.title}
                         </h4>
-                        <p className="mt-1.5 text-xs leading-relaxed text-zinc-400">
+                        <p className="mt-1 text-xs leading-relaxed text-zinc-400">
                           {mod.description}
                         </p>
                       </div>
-
-                      <ul className="space-y-1.5 border-t border-zinc-800/60 pt-3">
-                        {mod.highlights.map((item, idx) => (
-                          <li
-                            key={idx}
-                            className="flex items-center gap-2 text-[11px] text-zinc-500"
-                          >
-                            <CheckCircle2 className="h-3 w-3 text-zinc-500 shrink-0" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div className="mt-5 flex items-center justify-between border-t border-zinc-800/60 pt-3">
-                      <span className="text-xs font-semibold text-zinc-400 group-hover:text-zinc-200 transition-colors">
-                        Acceder al módulo
-                      </span>
-                      <ArrowUpRight
-                        className="h-4 w-4 text-zinc-500 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-zinc-300"
-                      />
                     </div>
                   </Link>
                 );
